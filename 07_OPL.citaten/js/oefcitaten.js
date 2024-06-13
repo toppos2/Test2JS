@@ -73,10 +73,22 @@ const QUOTES = [
 const quoteEl = document.getElementById("quote");
 const authorButtonEl = document.getElementById("authorButton");
 const nextQuoteButtonEl = document.getElementById("nextQuoteButton");
+const searchQuoteEl = document.getElementById("searchQuote");
 
 //state: changes on user action
 let idsOfShownQuotes = [];
+const favorits = [];
 
+/*function findQuote() {
+    searchQuoteEl.innerHTML = QUOTES.filter(q => q.toLowerCase().includes(searchQuoteEl.value.toLowerCase()))
+        .map(q=> <li>${q}</li>)
+        .join(" ");
+}*/
+
+function setfavorite(favorits) {
+    
+
+}
 
 function showAuthor() {
     const {author, info, life} = QUOTES.find(q => q.id === idsOfShownQuotes[0]);
@@ -89,7 +101,9 @@ function showAuthor() {
     authorButtonEl.hidden = true;
 }
 
-function showOneRandomQuote() {
+
+
+/*function showOneRandomQuote() {
     if (idsOfShownQuotes.length === QUOTES.length) idsOfShownQuotes = []; // means start over
 
     const availableQuotes = QUOTES.filter(q => !idsOfShownQuotes.includes(q.id));
@@ -98,13 +112,55 @@ function showOneRandomQuote() {
     idsOfShownQuotes = [nextQuote.id, ...idsOfShownQuotes];
     console.log(idsOfShownQuotes, availableQuotes);
 
-    quoteEl.innerHTML += `<div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === idsOfShownQuotes[0]).text}</h5></div>`;
+    quoteEl.innerHTML += `<div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === idsOfShownQuotes[0]).text}</h5>
+
+</div>`;
+    nextQuoteButtonEl.hidden = true;
+    authorButtonEl.hidden = false;
+}*/
+
+function renderQuote() {
+    if (idsOfShownQuotes.length === QUOTES.length) idsOfShownQuotes = []; // means start over
+
+    const availableQuotes = QUOTES.filter(q => !idsOfShownQuotes.includes(q.id));
+    const randomCitaatIndexInAvailableQuotes = Math.floor(Math.random() * availableQuotes.length);
+    const nextQuote = availableQuotes[randomCitaatIndexInAvailableQuotes];
+    idsOfShownQuotes = [nextQuote.id, ...idsOfShownQuotes];
+    console.log(idsOfShownQuotes, availableQuotes);
+
+    quoteEl.innerHTML += `<div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 0).text}</h5>
+  <p>${QUOTES.find(q => q.id === 0).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 1).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 1).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 2).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 2).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 3).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 3).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 4).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 4).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 5).text}</h5>
+                          <p>${QUOTES.find(q => q.id === 5).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 6).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 6).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 7).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 7).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 8).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 8).author}</p></div>
+                          <div class="card my-2 p-2"><h5>${QUOTES.find(q => q.id === 9).text}</h5>
+                            <p>${QUOTES.find(q => q.id === 9).author}</p></div>
+`;
     nextQuoteButtonEl.hidden = true;
     authorButtonEl.hidden = false;
 }
 
-showOneRandomQuote();
 
+
+//showOneRandomQuote();
+renderQuote()
+
+function searchQuote(){
+    findQuote()
+}
 
 //stap 1: bij opstart: toon een random citaat
 //stap 2: als user op de knop "van wie is dit citaat" klikt, toon author-info van het getoonde citaat
